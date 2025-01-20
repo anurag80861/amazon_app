@@ -82,7 +82,7 @@ const ProductCard = () => {
           </div>
           <button
             className="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-colors font-semibold"
-            onClick={() => handleAddToCart(product)}
+            onClick={() => handleAddToCart(product) }
           >
             Add to Cart
           </button>
