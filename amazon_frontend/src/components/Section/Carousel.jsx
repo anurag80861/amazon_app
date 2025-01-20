@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import img1 from "../../Assets/image1.jpg"
+import img2 from "../../Assets/image2.jpg"
+import img3 from "../../Assets/image3.jpg"
+import img4 from "../../Assets/image4.jpg"
+import img5 from "../../Assets/image5.jpg"
+import img6 from "../../Assets/image6.jpg"
 
 const Carousel = () => {
     const images = [
-        "/images/image1.jpg",
-        "/images/image2.jpg",
-        "/images/image3.jpg",
-        "/images/image4.jpg",
-        "/images/image5.jpg",
-        "/images/image6.jpg",
+        img1, img2, img3, img4, img5, img6
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,7 +20,7 @@ const Carousel = () => {
         }, 3000);
 
         return () => clearTimeout(timer);
-    }, [currentIndex,images.length]);
+    }, [currentIndex, images.length]);
 
     const goToNext = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
