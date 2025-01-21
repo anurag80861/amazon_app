@@ -16,7 +16,7 @@ function Homepage() {
                 <Navbar />
                 <Header />
                 <Carousel />
-               <CartOfData/>
+                <div className='mt-[-55vh] z-20 p-6'><CartOfData/></div>
                <ProductCard/>
                 <Footer />
             </div>
