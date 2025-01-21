@@ -1,10 +1,14 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, increaseQuantity, decreaseQuantity } from "../redux/cartSlice";
+
 
 import img1 from "../../Assets/image16.jpg";
 import img2 from "../../Assets/image17.jpg";
 import img3 from "../../Assets/image18.jpg";
 import img4 from "../../Assets/image19.jpg";
 import img5 from "../../Assets/image20.jpg";
+
 
 const products = [
   {
@@ -28,7 +32,7 @@ const products = [
   {
     id: 3,
     image: img3,
-    title: "JH Gallery Handcrafted Rajasthani Door & Wall   ",
+    title: "JH Gallery Handcrafted Rajasthani Door & Wall",
     rating: 4.3,
     reviews: 2869,
     price: 11499,
@@ -37,7 +41,7 @@ const products = [
   {
     id: 4,
     image: img4,
-    title: "VazzLox Night Lamp for Bedroom 4PCS Smart ",
+    title: "VazzLox Night Lamp for Bedroom 4PCS Smart",
     rating: 4.1,
     reviews: 9292,
     price: 114,
@@ -52,11 +56,30 @@ const products = [
     price: 1524,
     originalPrice: 1890,
   },
+
 ];
 
 const ProductCard = () => {
+  const dispatch = useDispatch();
+
+  const cartItems = useSelector((state) => state.cart.items);
+
+  const getQuantity = (productId) => {
+    const item = cartItems.find((item) => item.id === productId);
+    return item ? item.quantity : 0;
+  };
+
   const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
     console.log(`${product.title} added to cart!`);
+  };
+
+  const handleIncrease = (productId) => {
+    dispatch(increaseQuantity({ id: productId }));
+  };
+
+  const handleDecrease = (productId) => {
+    dispatch(decreaseQuantity({ id: productId }));
   };
 
   return (
@@ -78,14 +101,36 @@ const ProductCard = () => {
           </div>
           <div className="flex justify-center items-baseline mb-4">
             <span className="text-red-500 text-2xl font-bold">₹{product.price}</span>
-            <span className="text-gray-500 line-through ml-3 text-lg">₹{product.originalPrice}</span>
+            <span className="text-gray-500 line-through ml-3 text-lg">
+              ₹{product.originalPrice}
+            </span>
           </div>
-          <button
-            className="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-colors font-semibold"
-            onClick={() => handleAddToCart(product) }
-          >
-            Add to Cart
-          </button>
+
+          {/* Quantity Control */}
+          {getQuantity(product.id) > 0 ? (
+            <div className="flex items-center justify-between">
+              <button
+                onClick={() => handleDecrease(product.id)}
+                className="bg-gray-300 text-gray-800 px-3 py-1 rounded-md hover:bg-gray-400"
+              >
+                -
+              </button>
+              <span className="text-lg font-bold">{getQuantity(product.id)}</span>
+              <button
+                onClick={() => handleIncrease(product.id)}
+                className="bg-gray-300 text-gray-800 px-3 py-1 rounded-md hover:bg-gray-400"
+              >
+                +
+              </button>
+            </div>
+          ) : (
+            <button
+              className="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-colors font-semibold"
+              onClick={() => handleAddToCart(product)}
+            >
+              Add to Cart
+            </button>
+          )}
         </div>
       ))}
     </div>

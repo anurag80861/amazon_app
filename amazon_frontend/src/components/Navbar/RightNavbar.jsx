@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { PiShoppingCartSimple } from "react-icons/pi";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const RightNavbar = () => {
   const [showLanguagePopup, setShowLanguagePopup] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("English");
+
+  const cartItemsCount = useSelector((state) => state.cart.items.length);
 
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
@@ -186,7 +189,7 @@ const RightNavbar = () => {
         <PiShoppingCartSimple className="w-6 h-6" aria-label="Cart" />
         {/* Badge */}
         <span className="absolute -top-2 -right-2 bg-yellow-500 text-black text-xs font-bold rounded-full px-1.5">
-          0
+          {cartItemsCount}
         </span>
       </Link>
     </div>

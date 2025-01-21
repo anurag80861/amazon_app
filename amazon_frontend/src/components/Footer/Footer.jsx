@@ -10,7 +10,7 @@ function Footer() {
       <GetToKnow />
       <ConnectWithUs />
       <MakeMoneyWithUs />
-      <LetUsHelpYou />
+      <LetUsHelpYou/>
     </footer>
   );
 }

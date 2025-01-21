@@ -6,9 +6,6 @@ import Header from '../components/Header/Header'
 import CartOfData from '../components/Section/CartOfData'
 import ProductCard from '../components/Section/ProductCart'
 
-
-
-
 function Homepage() {
     return (
         <div>
@@ -16,8 +13,8 @@ function Homepage() {
                 <Navbar />
                 <Header />
                 <Carousel />
-                <div className='mt-[-55vh] z-20 p-6'><CartOfData/></div>
-               <ProductCard/>
+                <div className='mt-[-55vh] z-20 p-6'><CartOfData /></div>
+                <ProductCard />
                 <Footer />
             </div>
         </div>
